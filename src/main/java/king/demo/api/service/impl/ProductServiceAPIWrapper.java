@@ -28,7 +28,7 @@ public class ProductServiceAPIWrapper implements ProductService {
 
 	@Override
 	public List<Product> listAll() {
-		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "?limit=0", String.class);
 		if (response.getStatusCode() == HttpStatus.OK) {
 			ObjectMapper mapper = new ObjectMapper();		
 			try {
