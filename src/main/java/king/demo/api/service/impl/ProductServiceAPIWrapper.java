@@ -44,4 +44,44 @@ public class ProductServiceAPIWrapper implements ProductService {
 			return null;
 		}
 	}
+
+	@Override
+	public Product findById(Long id) {
+		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "/" + id.toString(), String.class);
+		if (response.getStatusCode() == HttpStatus.OK) {
+			ObjectMapper mapper = new ObjectMapper();	
+			try {
+				return mapper.readValue(response.getBody(), Product.class);
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Product> searchByName(String query) {
+		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "/search?q=" + query, String.class);
+		if (response.getStatusCode() == HttpStatus.OK) {
+			ObjectMapper mapper = new ObjectMapper();		
+			try {
+				JsonNode jsonNode = mapper.readTree(response.getBody());
+				return mapper.convertValue(jsonNode.get("products"), new TypeReference<List<Product>>(){});
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return null;
+		} else {
+			return null;
+		}
+	}
+	
+	
 }
