@@ -218,6 +218,11 @@ public class Product {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+	
+	public ProductDTO getProjection() {
+		return new ProductDTO(this.title, this.description, this.price, this.thumbnail);
+	}
+	
 
     public Product() {}
 	
