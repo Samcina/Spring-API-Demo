@@ -1,6 +1,8 @@
 package king.demo.api.service.impl;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,6 +83,21 @@ public class ProductServiceAPIWrapper implements ProductService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Product> filterByCategoryAndPrice(String category, Float priceGreaterThan, Float priceLessThan) {
+		List<Product> products = listAll();
+		if(Objects.nonNull(category)) {
+			products = products.stream().filter((p) -> {return p.getCategory().equalsIgnoreCase(category);}).collect(Collectors.toList());
+		}
+		if(Objects.nonNull(priceGreaterThan)) {
+			products = products.stream().filter((p) -> {return p.getPrice().compareTo(priceGreaterThan) >= 0;}).collect(Collectors.toList());
+		}
+		if(Objects.nonNull(priceLessThan)) {
+			products = products.stream().filter((p) -> {return p.getPrice().compareTo(priceLessThan) <= 0;}).collect(Collectors.toList());
+		}
+		return products;
 	}
 	
 	

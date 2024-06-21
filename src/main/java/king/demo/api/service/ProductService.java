@@ -8,4 +8,5 @@ public interface ProductService {
 	List<Product> listAll();
 	Product findById(Long id);
 	List<Product> searchByName(String query);
+	List<Product> filterByCategoryAndPrice(String category, Float priceGreaterThan, Float priceLessThan);
 }

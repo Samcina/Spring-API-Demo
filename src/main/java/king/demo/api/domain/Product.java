@@ -1,5 +1,8 @@
 package king.demo.api.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -221,6 +224,12 @@ public class Product {
 	
 	public ProductDTO getProjection() {
 		return new ProductDTO(this.title, this.description, this.price, this.thumbnail);
+	}
+	
+	public static List<ProductDTO> getProjectionFromList(List<Product> products) {
+		List<ProductDTO> productsProjection = new ArrayList<ProductDTO>();
+		products.forEach((e) -> productsProjection.add(e.getProjection()));
+		return productsProjection;
 	}
 	
 
