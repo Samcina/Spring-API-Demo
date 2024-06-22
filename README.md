@@ -47,6 +47,6 @@ Required header: Authorization (with provided bearer token) <br/>
 Example use: http://localhost:8080/products/auth/user
 
 ## GET /products/auth/admin
-Fetches data about all the products to admins with a provided bearer token
-Required header: Authorization (with provided bearer token)
+Fetches data about all the products to admins with a provided bearer token <br/>
+Required header: Authorization (with provided bearer token) <br/>
 Example use: http://localhost:8080/products/auth/admin
