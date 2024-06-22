@@ -28,6 +28,7 @@ public class ProductServiceAPIWrapper implements ProductService {
 		this.restTemplate = new RestTemplate();
 	}
 
+	//fetches all products from DummyJSON API
 	@Override
 	public List<Product> listAll() {
 		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "?limit=0", String.class);
@@ -47,6 +48,7 @@ public class ProductServiceAPIWrapper implements ProductService {
 		}
 	}
 
+	//fetches products based on id from DummyJSON API
 	@Override
 	public Product findById(Long id) {
 		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "/" + id.toString(), String.class);
@@ -66,6 +68,7 @@ public class ProductServiceAPIWrapper implements ProductService {
 		}
 	}
 
+	//fetches products based on search query from DummyJSON API
 	@Override
 	public List<Product> searchByName(String query) {
 		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl + "/search?q=" + query, String.class);
@@ -85,6 +88,7 @@ public class ProductServiceAPIWrapper implements ProductService {
 		}
 	}
 
+	//fetches products based on filters from DummyJSON API
 	@Override
 	public List<Product> filterByCategoryAndPrice(String category, Float priceGreaterThan, Float priceLessThan) {
 		List<Product> products = listAll();
